@@ -1,0 +1,14 @@
+.transparent-header {
+    background-color: transparent;
+    opacity: 0.8;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    display:flex;
+    padding: 5px 20px;
+    .upload-icon {
+        font-size: 5rem;
+    }
+  }

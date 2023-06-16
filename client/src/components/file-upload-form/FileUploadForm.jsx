@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+
 import Dropzone from 'react-dropzone';
 import axios from 'axios';
+
+import './file-upload-form.scss';
 
 class FileUploadForm extends Component {
   constructor(props) {
@@ -36,7 +39,7 @@ class FileUploadForm extends Component {
     return (
       <Dropzone onDrop={this.handleFileSelect}>
         {({ getRootProps, getInputProps }) => (
-          <div {...getRootProps({className: 'dropzone'})}>
+          <div {...getRootProps({ className: 'drop-zone' })}>
             <input {...getInputProps()} />
 
             {selectedFile ? (
@@ -45,7 +48,7 @@ class FileUploadForm extends Component {
               <p>Drag and drop a file here, or click to select a file</p>
             )}
 
-            <button onClick={this.handleFileUpload}>Upload File</button>
+            <button className='App-link' onClick={this.handleFileUpload}>Upload File</button>
           </div>
         )}
       </Dropzone>
