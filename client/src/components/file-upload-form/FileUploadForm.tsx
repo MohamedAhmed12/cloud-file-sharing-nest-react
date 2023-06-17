@@ -1,28 +1,39 @@
 import React, { Component } from 'react';
 
+import './file-upload-form.scss';
+
+import FileUploadFormProps from './interfaces/FileUploadFormProps';
+import FileUploadFormState from './interfaces/FileUploadFormState';
 import Dropzone from 'react-dropzone';
 import axios from 'axios';
 
-import './file-upload-form.scss';
-
-class FileUploadForm extends Component {
-  constructor(props) {
+class FileUploadForm extends Component<
+  FileUploadFormProps,
+  FileUploadFormState
+> {
+  constructor(props: FileUploadFormProps) {
     super(props);
     this.state = { selectedFile: null };
     this.handleFileSelect = this.handleFileSelect.bind(this);
     this.handleFileUpload = this.handleFileUpload.bind(this);
   }
 
-  handleFileSelect(file) {
+  handleFileSelect(file: File[]) {
     this.setState({ selectedFile: file[0] });
   }
 
   async handleFileUpload() {
+    const { selectedFile } = this.state;
+
+    if (!selectedFile) {
+      return;
+    }
+
     const formData = new FormData();
-    formData.append('file', this.state.selectedFile);
+    formData.append('file', selectedFile);
 
     try {
-      const res = await axios.props('/api/files', formData, {
+      const res = await axios.post('/api/files', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -36,6 +47,7 @@ class FileUploadForm extends Component {
 
   render() {
     const { selectedFile } = this.state;
+
     return (
       <Dropzone onDrop={this.handleFileSelect}>
         {({ getRootProps, getInputProps }) => (
@@ -48,7 +60,9 @@ class FileUploadForm extends Component {
               <p>Drag and drop a file here, or click to select a file</p>
             )}
 
-            <button className='App-link' onClick={this.handleFileUpload}>Upload File</button>
+            <button className="App-link" onClick={this.handleFileUpload}>
+              Upload File
+            </button>
           </div>
         )}
       </Dropzone>
