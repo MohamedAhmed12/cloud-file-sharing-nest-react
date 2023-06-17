@@ -1,0 +1,7 @@
+{
+    "name": "default",
+    "type": "mongodb",
+    "host": "localhost",
+    "synchronize": true,
+    "entities": ["dist/**/*.entity.js"]
+}
