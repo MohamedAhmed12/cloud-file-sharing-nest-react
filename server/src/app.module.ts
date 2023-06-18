@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { GraphQLModule } from '@nestjs/graphql';
+import { ApolloDriver } from '@nestjs/apollo';
 
 const ormConfig = require('../ormconfig.json');
 
@@ -19,10 +20,12 @@ const ormConfig = require('../ormconfig.json');
         }
         return { headers: req.headers };
       },
+      driver: ApolloDriver,
       debug: true,
+      playground: true,
       installSubscriptionHandlers: true,
     }),
-    TypeOrmModule.forRoot(ormConfig[0]),
+    TypeOrmModule.forRoot(ormConfig),
   ],
   controllers: [AppController],
   providers: [AppService],
