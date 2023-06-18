@@ -36,6 +36,7 @@ lerna-debug.log*
 
 # server
 /server/node_modules
+/server/dist
 
 # client
 /client/node_modules
