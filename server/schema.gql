@@ -8,6 +8,7 @@ type User {
   email: String!
   created_at: DateTime!
   updated_at: DateTime!
+  auth_token: String!
 }
 
 """
@@ -15,30 +16,21 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
-type UserDTO {
-  id: ID!
-  name: String!
-  email: String!
-  created_at: DateTime!
-  updated_at: DateTime!
-  auth_token: String!
-}
-
 type Query {
   users: [User!]!
 }
 
 type Mutation {
-  login(data: LoginUserValidation!): UserDTO!
-  register(data: RegisterUserValidation!): UserDTO!
+  login(data: LoginUserDTO!): User!
+  register(data: RegisterUserDTO!): User!
 }
 
-input LoginUserValidation {
+input LoginUserDTO {
   email: String!
   password: String!
 }
 
-input RegisterUserValidation {
+input RegisterUserDTO {
   email: String!
   password: String!
   name: String!

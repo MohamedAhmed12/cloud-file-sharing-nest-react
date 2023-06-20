@@ -1,9 +1,9 @@
 import { Field, InputType } from '@nestjs/graphql';
 import { IsNotEmpty, IsString, MaxLength, MinLength } from 'class-validator';
-import { LoginUserValidation } from './login-user.validation';
+import { LoginUserDTO } from './login-user.dto';
 
 @InputType()
-export class RegisterUserValidation extends LoginUserValidation{
+export class RegisterUserDTO extends LoginUserDTO{
   @IsString()
   @IsNotEmpty()
   @MaxLength(23)

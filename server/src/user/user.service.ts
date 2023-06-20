@@ -3,11 +3,8 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './user.entity';
 import { Repository } from 'typeorm';
-
-import { UserDTO } from './user.dto';
-
-import { LoginUserValidation } from './login-user.validation';
-import { RegisterUserValidation } from './register-user.validation';
+import { LoginUserDTO } from './dtos/login-user.dto';
+import { RegisterUserDTO } from './dtos/register-user.dto';
 
 @Injectable()
 export class UserService {
@@ -20,7 +17,7 @@ export class UserService {
         return await this.user.find();
     }
 
-    async login(data: LoginUserValidation): Promise<UserDTO | HttpException> {
+    async login(data: LoginUserDTO): Promise<User | HttpException> {
         const user = await this.user.findOne({
             where: { email: data.email },
         });
@@ -32,7 +29,7 @@ export class UserService {
         return user;
     }
 
-    async register({ email, name, password, password_confirmation }: RegisterUserValidation): Promise<UserDTO | HttpException> {
+    async register({ email, name, password, password_confirmation }: RegisterUserDTO): Promise<User | HttpException> {
         if (password != password_confirmation) {
             return new HttpException('Password and password_confirmation should match', HttpStatus.BAD_REQUEST);
         }

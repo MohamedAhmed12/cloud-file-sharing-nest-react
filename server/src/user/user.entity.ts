@@ -35,14 +35,15 @@ export class User extends BaseEntity {
 
     @CreateDateColumn()
     @Field()
-    updated_at: Date;
-
-    get auth_token(): string | undefined {
-        const { id, name } = this;
-        return sign({ id, name }, config.JWT_TOKEN, {
-            expiresIn: config.JWT_TOKEN_EXPIRATION,
-        });
-    }
+    updated_at: Date;    
+    
+    @Field()
+    public get auth_token(): string | undefined {
+      const { id, name } = this;
+      return sign({ id, name }, config.JWT_TOKEN, {
+          expiresIn: config.JWT_TOKEN_EXPIRATION,
+      });
+  }
 
     @BeforeInsert()
     async hashPass() {
