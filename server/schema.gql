@@ -30,9 +30,17 @@ type Query {
 
 type Mutation {
   login(data: LoginUserValidation!): UserDTO!
+  register(data: RegisterUserValidation!): UserDTO!
 }
 
 input LoginUserValidation {
   email: String!
   password: String!
+}
+
+input RegisterUserValidation {
+  email: String!
+  password: String!
+  name: String!
+  password_confirmation: String!
 }

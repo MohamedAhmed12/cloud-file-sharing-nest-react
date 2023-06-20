@@ -10,11 +10,33 @@ exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
+const user_module_1 = require("./user/user.module");
+const typeorm_1 = require("@nestjs/typeorm");
+const graphql_1 = require("@nestjs/graphql");
+const apollo_1 = require("@nestjs/apollo");
+const ormConfig = require('../ormconfig.json');
 let AppModule = exports.AppModule = class AppModule {
 };
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [],
+        imports: [
+            user_module_1.UserModule,
+            graphql_1.GraphQLModule.forRoot({
+                autoSchemaFile: 'schema.gql',
+                context: ({ req, connection }) => {
+                    if (connection) {
+                        console.log('>>>>>>>>>>>', connection, '>>>>>>>>>>');
+                        return { headers: connection.context };
+                    }
+                    return { headers: req.headers };
+                },
+                driver: apollo_1.ApolloDriver,
+                debug: true,
+                playground: true,
+                installSubscriptionHandlers: true,
+            }),
+            typeorm_1.TypeOrmModule.forRoot(ormConfig),
+        ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
     })

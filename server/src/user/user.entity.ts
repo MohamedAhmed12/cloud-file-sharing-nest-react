@@ -1,8 +1,10 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
+import { hash } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
 import { config } from 'src/shared/config';
 import {
   BaseEntity,
+  BeforeInsert,
   Column,
   CreateDateColumn,
   Entity,
@@ -40,5 +42,10 @@ export class User extends BaseEntity {
     return sign({ id, name }, config.JWT_TOKEN, {
       expiresIn: config.JWT_TOKEN_EXPIRATION,
     });
+  }
+
+  @BeforeInsert()
+  async hashPass() {
+    this.password = await hash(this.password, 12);
   }
 }
