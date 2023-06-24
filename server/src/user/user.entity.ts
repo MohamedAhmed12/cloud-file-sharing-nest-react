@@ -1,7 +1,7 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
 import { hash } from 'bcryptjs';
 import { sign } from 'jsonwebtoken';
-import { config } from 'src/shared/config';
+import { config } from '../shared/config';
 import {
     BaseEntity,
     BeforeInsert,

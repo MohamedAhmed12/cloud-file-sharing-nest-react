@@ -25,7 +25,7 @@ const ormConfig = require('../ormconfig.json');
       playground: true,
       installSubscriptionHandlers: true,
     }),
-    TypeOrmModule.forRoot(ormConfig),
+    TypeOrmModule.forRoot(ormConfig[0]),
   ],
   controllers: [AppController],
   providers: [AppService],
