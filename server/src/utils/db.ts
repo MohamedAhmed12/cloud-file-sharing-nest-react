@@ -1,5 +1,4 @@
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { User } from "src/user/user.entity";
 import { DataSource } from "typeorm";
 
 export const createDbConnection = (entities: any[]) => {

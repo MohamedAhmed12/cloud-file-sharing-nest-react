@@ -9,8 +9,7 @@ import { RegisterUserDTO } from './dtos/register-user.dto';
 @Injectable()
 export class UserService {
     constructor(
-        @InjectRepository(User)
-        private readonly user: Repository<User>
+        @InjectRepository(User) private readonly user: Repository<User>
     ) {}
 
     async get(): Promise<User[]> {
