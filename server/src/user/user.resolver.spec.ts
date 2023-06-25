@@ -1,16 +1,16 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { UserResolver } from './user.resolver';
-import { UserService } from './user.service';
 import { User } from './user.entity';
 import { Repository } from 'typeorm';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import { compareSync, hashSync,genSaltSync } from 'bcryptjs';
+import { compareSync, hashSync, genSaltSync } from 'bcryptjs';
 import { RegisterUserDTO } from './dtos/register-user.dto';
 import { createDbConnection } from '../utils/db';
+import { LoginUserDTO } from './dtos/login-user.dto';
+import { UserService } from './user.service';
 
 describe('UserResolver', () => {
     let resolver: UserResolver;
-    let userService: UserService;
     let userRepository: Repository<User>;
 
     beforeEach(async () => {
@@ -20,7 +20,6 @@ describe('UserResolver', () => {
         }).compile();
 
         resolver = module.get<UserResolver>(UserResolver);
-        userService = module.get<UserService>(UserService);
         userRepository = module.get<Repository<User>>(getRepositoryToken(User));
         jest.clearAllMocks();
     });
@@ -38,8 +37,8 @@ describe('UserResolver', () => {
             "password_confirmation": "123456789",
         }
 
-        it('should create user', async () => {            
-            await userService.register(registerData);
+        it('should create user', async () => {
+            await resolver.register(registerData);
 
             createdUser = await userRepository.findOne({
                 where: { email: registerData.email }
@@ -58,5 +57,31 @@ describe('UserResolver', () => {
         it('should hash password', async () => {
             expect(compareSync(registerData.password, createdUser.password)).toBeTruthy();
         });
+    });
+
+    describe('should login user', () => {
+        const loginData: LoginUserDTO = {
+            "email": "test@gmail.com",
+            "password": "123456789",
+        }
+
+        it('should login user', async () => {
+            let createdUser = await userRepository.create({
+                ...loginData,
+                "name": "first name",
+            });
+            createdUser = await userRepository.save(createdUser);
+            
+            const response = await resolver.login(loginData);
+
+            expect(response).toEqual({
+                "id": 1,
+                "email": loginData.email,
+                "name": "first name",
+                "password": createdUser.password,
+                "created_at": createdUser.created_at,
+                "updated_at": createdUser.updated_at,
+            });
+        })
     });
 });
