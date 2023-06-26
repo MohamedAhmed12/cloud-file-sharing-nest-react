@@ -1,4 +1,5 @@
 .transparent-header {
+  height: 80px;
   background-color: transparent;
   opacity: 0.8;
   position: fixed;
@@ -11,6 +12,7 @@
   padding: 5px 20px;
   .upload-icon {
     font-size: 5rem;
+    margin-top: 2px;
   }
   .right-group {
     display: flex;

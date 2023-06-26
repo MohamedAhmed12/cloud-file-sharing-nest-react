@@ -1,6 +1,6 @@
 import React, { useState, MouseEvent } from 'react';
 
-import './header.scss';
+import 'assets/scss/components/header.scss';
 
 import CloudUploadOutlinedIcon from '@mui/icons-material/CloudUploadOutlined';
 import {
@@ -27,7 +27,7 @@ function Header() {
   const handleClick = (event: MouseEvent) => setAnchorEl(event.currentTarget);
 
   return (
-    <header className="transparent-header">
+    <header className="App-header transparent-header">
       <CloudUploadOutlinedIcon className="upload-icon" />
 
       <span className="right-group">
