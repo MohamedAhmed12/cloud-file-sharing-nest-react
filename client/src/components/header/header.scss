@@ -1,15 +1,21 @@
 .transparent-header {
-    background-color: transparent;
-    opacity: 0.8;
-    position: fixed;
-    justify-content: space-between;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1;
-    display:flex;
-    padding: 5px 20px;
-    .upload-icon {
-        font-size: 5rem;
+  background-color: transparent;
+  opacity: 0.8;
+  position: fixed;
+  justify-content: space-between;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  display: flex;
+  padding: 5px 20px;
+  .upload-icon {
+    font-size: 5rem;
+  }
+  .right-group {
+    display: flex;
+    button {
+        color: #2196f3;
     }
   }
+}

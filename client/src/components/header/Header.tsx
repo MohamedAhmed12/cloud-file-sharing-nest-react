@@ -3,36 +3,56 @@ import React, { useState, MouseEvent } from 'react';
 import './header.scss';
 
 import CloudUploadOutlinedIcon from '@mui/icons-material/CloudUploadOutlined';
-import { Menu, MenuItem, Tooltip, IconButton, Avatar } from '@mui/material';
+import {
+  Menu,
+  MenuItem,
+  Tooltip,
+  IconButton,
+  Avatar,
+  Button,
+} from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 function Header() {
   const [anchorEl, setAnchorEl] = useState<null | Element>(null);
-
+  const navigate = useNavigate();
   const open = Boolean(anchorEl);
 
-  const handleClose = () => setAnchorEl(null);
+  const handleClose = (route?: string) => {
+    if (route) {
+      navigate(route);
+    }
+    setAnchorEl(null);
+  };
   const handleClick = (event: MouseEvent) => setAnchorEl(event.currentTarget);
 
   return (
     <header className="transparent-header">
       <CloudUploadOutlinedIcon className="upload-icon" />
 
-      <Tooltip title="Account settings" onClick={handleClick}>
-        <IconButton onClick={handleClick}>
-          <Avatar sx={{ width: 50, height: 50 }}></Avatar>
-        </IconButton>
-      </Tooltip>
+      <span className="right-group">
+        <Tooltip title="login">
+          <Button onClick={() => navigate('/auth/login')}>Login</Button>
+        </Tooltip>
+        <Tooltip title="register">
+          <Button onClick={() => navigate('/auth/register')}>Register</Button>
+        </Tooltip>
 
-      <Menu
-        anchorEl={anchorEl}
-        open={open}
-        onClick={handleClose}
-        onClose={handleClose}
-      >
-        <MenuItem onClick={handleClose}>Files</MenuItem>
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
-      </Menu>
+        <Tooltip title="Account settings" onClick={handleClick}>
+          <IconButton onClick={handleClick}>
+            <Avatar sx={{ width: 50, height: 50 }}></Avatar>
+          </IconButton>
+        </Tooltip>
+
+        <Menu
+          anchorEl={anchorEl}
+          open={open}
+          onClick={() => handleClose()}
+          onClose={() => handleClose()}
+        >
+          <MenuItem onClick={() => handleClose('/my-files')}>Files</MenuItem>
+        </Menu>
+      </span>
     </header>
   );
 }

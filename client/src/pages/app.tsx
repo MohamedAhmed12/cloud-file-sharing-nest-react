@@ -1,10 +1,7 @@
-import React from 'react';
-import logo from './logo.svg';
+import FileUploadForm from '../components/forms/file-upload-form/FileUploadForm';
+import Header from '../components/header/Header';
 
-import './App.css';
-
-import FileUploadForm from './components/file-upload-form/FileUploadForm';
-import Header from './components/header/Header';
+import '../css/app.css';
 
 function App() {
   return (
