@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="App">
         <Header />
-        <FileUploadForm className="App-logo" />
+        <FileUploadForm />
     </div>
   );
 }

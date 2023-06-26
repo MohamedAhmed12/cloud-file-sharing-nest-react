@@ -31,10 +31,10 @@ function Header() {
       <CloudUploadOutlinedIcon className="upload-icon" />
 
       <span className="right-group">
-        <Tooltip title="login">
+        <Tooltip title="">
           <Button onClick={() => navigate('/auth/login')}>Login</Button>
         </Tooltip>
-        <Tooltip title="register">
+        <Tooltip title="">
           <Button onClick={() => navigate('/auth/register')}>Register</Button>
         </Tooltip>
 
