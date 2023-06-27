@@ -1,0 +1,44 @@
+.register-form-container {
+  display: flex !important;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  .register-form {
+    width: 400px;
+    padding: 30px 40px;
+    .MuiCardHeader-root {
+      padding: 0;
+      text-align: center;
+      span {
+        font-size: 32px;
+        font-weight: 700;
+        margin-bottom: 20px;
+      }
+    }
+    .MuiCardContent-root {
+      display: flex;
+      flex-direction: column;
+      .MuiFormControl-root {
+        margin-bottom: 15px;
+        flex-grow: 1;
+        label{
+            font-size: 0.9rem;
+            line-height: 0.8em;
+        }
+        input {
+          border-radius: 9px;
+          height: 41px;
+          padding: 0px 14px;
+        }
+      }
+    }
+    .MuiCardActions-root {
+      padding: 16px;
+      button {
+        background-color: #282c34;
+        opacity: 0.8;
+        flex-grow: 1;
+      }
+    }
+  }
+}

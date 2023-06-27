@@ -1,9 +1,12 @@
-import { Component } from 'react';
+import RegisterForm from 'components/forms/register-form/RegisterForm';
+import { Container } from '@mui/material';
 
-class Register extends Component {
-  render() {
-    return <div>Register page</div>;
-  }
+import 'assets/scss/pages/register.scss';
+
+export default function Register() {
+  return (
+    <Container className="register-form-container">
+      <RegisterForm />
+    </Container>
+  );
 }
-
-export default Register

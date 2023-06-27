@@ -1,6 +1,6 @@
 import { Component } from 'react';
 
-import 'assets/scss/components/file-upload-form.scss';
+import 'assets/scss/components/forms/file-upload-form.scss';
 
 import FileUploadFormProps from './interfaces/FileUploadFormProps';
 import FileUploadFormState from './interfaces/FileUploadFormState';
